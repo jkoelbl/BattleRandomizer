@@ -1,0 +1,7 @@
+is hit
+evades
+blocks
+dashes out of the way
+ducks
+dives
+leaps away

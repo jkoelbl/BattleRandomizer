@@ -1,0 +1,7 @@
+players 1
+moves 1
+reactions 1
+moves_special 1
+reactions_special 1
+special 0.05
+counter 0.125
