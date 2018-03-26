@@ -1,0 +1,4 @@
+is hit.
+is cut.
+is hurt.
+sheds blood.

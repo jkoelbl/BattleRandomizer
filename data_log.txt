@@ -1,5 +1,9 @@
-players
+players_1
+players_2
 moves
-reactions
 moves_special
-reactions_special
+reactions_good
+reactions_good_special
+reactions_bad
+reactions_bad_special
+random_actions
