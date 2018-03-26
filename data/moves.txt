@@ -1,8 +1,8 @@
-swings wildly.
-thrusts.
-strikes.
-kicks.
-punchs.
-charges.
-swings low.
-swings high.
+1;swings wildly.
+2;thrusts.
+2;strikes.
+1;kicks.
+1;punchs.
+2;charges.
+2;swings low.
+2;swings high.

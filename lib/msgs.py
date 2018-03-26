@@ -13,6 +13,12 @@ class message:
 	def rnd_msg(self):
 		return self.msgs[randint(0, len(self.msgs)-1)]
 	
+	def find(self, ref):
+		for i in range(len(self.msgs)):
+			if self.msgs[i] == ref:
+				return i
+		return -1
+	
 	def __str__(self):
 		s = ''
 		for i in range(len(self.msgs)):
