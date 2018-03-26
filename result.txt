@@ -1,0 +1,46 @@
+Side 1: Toulouse, Miriam, Valerie
+Health: 5 5 5
+Side 2: Kane
+Health: 5
+
+Kane thrusts. Valerie dashes out of the way.
+Miriam punchs. Countering, Kane thrusts. Miriam leaps away.
+Kane kicks. Toulouse dives.
+Toulouse thrusts. Kane ducks.
+Kane swings wildly. Miriam blocks.
+Miriam swings wildly. Kane ducks.
+Miriam swings wildly. Kane leaps away.
+Miriam thrusts. Kane leaps away.
+Kane strikes. Toulouse dives.
+Valerie swings high. Kane ducks.
+Valerie swings high. Kane is hurt. Kane's health is now 4.
+Kane swings high. Valerie dives.
+Kane swings low. Countering, Valerie charges. Countering, Kane unleashes a powerful volley of strikes, moving faster than anyone ever before. Valerie blocks the oncoming attack with ease.
+Toulouse thrusts. Kane is hurt. Kane's health is now 3.
+Kane thrusts. Toulouse ducks.
+Toulouse swings wildly. Countering, Kane strikes. Toulouse sheds blood. Toulouse's health is now 4.
+Kane strikes. Valerie evades.
+Kane swings wildly. Countering, Miriam swings high. Kane dashes out of the way.
+Kane swings high. Miriam sheds blood. Miriam's health is now 4.
+Valerie thrusts. Countering, Kane thrusts. Valerie is cut. Valerie's health is now 4.
+Kane swings wildly. Toulouse leaps away.
+Valerie swings high. Kane ducks.
+Valerie thrusts. Countering, Kane swings low. Valerie ducks.
+Kane strikes. Valerie is hurt. Valerie's health is now 3.
+Kane kicks. Toulouse blocks.
+Kane punchs. Miriam leaps away.
+Miriam strikes. Kane evades.
+Kane swings high. Countering, Valerie kicks. Kane is hit. Kane's health is now 2.
+Kane swings high. Miriam ducks.
+Kane charges. Toulouse dives.
+Kane punchs. Toulouse evades.
+Kane throws pocket sand.
+Miriam strikes. Kane sheds blood. Kane's health is now 1.
+Kane swings low. Miriam dives.
+Kane strikes. Valerie evades.
+Kane punchs. Valerie dashes out of the way.
+Kane charges. Miriam is hurt. Miriam's health is now 3.
+Valerie kicks. Kane is cut. Kane's health is now 0.
+Kane is too injured and can't continue on.
+
+Side 2 is defeated!

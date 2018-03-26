@@ -10,17 +10,8 @@ class message:
 		elif len(data) > 0:
 			self.msgs = self.msgs + data
 	
-	def copy(self, data):
-		self.msgs = data
-	
 	def rnd_msg(self):
 		return self.msgs[randint(0, len(self.msgs)-1)]
-	
-	def find(self, ref):
-		for i in range(len(self.msgs)):
-			if self.msgs[i] == ref:
-				return i
-		return -1
 	
 	def __str__(self):
 		s = ''
@@ -29,3 +20,10 @@ class message:
 				s += ', '
 			s += self.msgs[i]
 		return s
+
+class delim_message(message):
+	def __init__(self, filename='', data=[], hasDelim=False):
+		if hasDelim:
+			self.msgs = self.msgs + get_data_delim(filename)
+		else:
+			super(self, filename, data)

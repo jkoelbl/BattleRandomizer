@@ -1,5 +1,16 @@
-from lib import get_data, message
+from lib import *
 from random import random, randint
+
+def rand_elem(L):
+	return L[randint(0, len(L)-1)]
+
+def to_str(L):
+	s = ''
+	for i in range(len(L)):
+		if i > 0:
+			s+= ', '
+		s += str(L[i])
+	return s
 
 def concat(player, msg):
 	return player + ' ' + msg
@@ -9,10 +20,33 @@ def roll_dice(prob):
 
 def find(L, ref):
 	for i in range(len(L)):
-		j = L[i].find(ref)
-		if j != -1:
-			return i, j
+		for j in range(len(L[i])):
+			if L[i][j] == ref:
+				return i, j
 	return -1, -1
+
+def starting_stats(players, health, f):
+	for i in range(len(players)):
+		if i > 0:
+			f.write('\nv.\n\n')
+		for j in range(len(players[i])):
+			f.write(players[i][j] + " - health: " + str(health[i][j]) + '\n')
+	f.write('\n')
+
+def check_health(health, players, f):
+	h = health
+	p = players
+	indeces = []
+	for i in range(len(p)):
+		for j in range(len(p[i])):
+			if h[i][j] < 1:
+				indeces.append((i, j))
+	for ix in indeces:
+		i, j = ix
+		f.write(p[i][j] + ' is too injured and can\'t continue on.\n')
+		h[i].pop(j)
+		p[i].pop(j)
+	return health, players
 
 def reduce_health(health, player, special):
 	health -= 1
@@ -21,9 +55,9 @@ def reduce_health(health, player, special):
 	out = ' ' + player + '\'s health is now ' + str(health) + '.'
 	return out, health
 
-def do_battle(players, moves, react, rand_act, probs, health):
+def do_battle(players, moves, react, rand_act, counters, probs, health):
 	side = roll_dice(probs['players'])
-	opponent = [p.rnd_msg() for p in players]
+	opponent = [rand_elem(p) for p in players]
 	
 	if roll_dice(probs['rand_act']) == 1:
 		out = concat(opponent[side], rand_act.rnd_msg())
@@ -34,7 +68,7 @@ def do_battle(players, moves, react, rand_act, probs, health):
 	
 	while roll_dice(probs['counter']) == 1 and special != 1:
 		special = roll_dice(probs['special'])
-		out += ' Countering, ' + concat(opponent[1-side], moves[special].rnd_msg())
+		out += counters.rnd_msg() + concat(opponent[1-side], moves[special].rnd_msg())
 		side = 1-side
 	
 	outcome = roll_dice(probs['bad'])
@@ -46,35 +80,42 @@ def do_battle(players, moves, react, rand_act, probs, health):
 		out += temp
 	
 	return out, health
-
+	
 def main(f):
 	pieces = get_data('data_log.txt', 'strip')
-	players = [message('data/players_1.txt'), message('data/players_2.txt')]
+	players = [get_data('data/players_1.txt', 'strip'), get_data('data/players_2.txt', 'strip')]
 	moves = [message('data/moves.txt'), message('data/moves_special.txt')]
 	react_good = [message('data/reactions_good.txt'), message('data/reactions_good_special.txt')]
 	react_bad = [message('data/reactions_bad.txt'), message('data/reactions_bad_special.txt')]
-	rand_act = message('data/random_actions.txt')
-	raw = get_data('probs.txt', 'split+strip')
-
 	react = [react_good, react_bad]
+	rand_act = message('data/random_actions.txt')
+	counters = delim_message('data/counters.txt')
+	
+	player_ref = [to_str(p) for p in players]
+	
+	raw = get_data('probs.txt', 'split+strip')
 	probs = {}
 	for r in raw:
 		probs[r[0]] = float(r[1])
 	
-	health = [[10, 10, 10], [10]]
-	for i in range(len(players)):
-		f.write('Side '+ str(i+1) + ': ' + players[i].__str__() + '\n')
-		f.write('Health:')
-		for h in health[i]:
-			f.write(' ' + str(h))
-		f.write('\n')
-	f.write('\n')
+	health = [[5, 5, 5], [5]]
+	starting_stats(players, health, f)
 	
-	while min(health[0]) > 0 and min(health[1]) > 0:
-		out, health = do_battle(players, moves, react, rand_act, probs, health)
+	while len(health[0]) > 0 and len(health[1]) > 0:
+		out, health = do_battle(players, moves, react, rand_act, counters, probs, health)
 		f.write(out + '\n')
-	side = 1 if min(health[0]) < min(health[1]) else 2
-	f.write('\nSide ' + str(side) + ' is defeated!\n')
+		health, players = check_health(health, players, f)
+	side = 0 if len(health[0]) == 0 else 1
+	f.write(to_str(players[1-side]) + ' defeated ' + player_ref[side] + '!\n')
 
-with open('result.txt', 'w') as f:
-	main(f)
+class forDebugging:
+	def write(self, arg):
+		print(arg)
+
+#with open('result.txt', 'w') as f:
+f = forDebugging()
+main(f)
+
+''' TODO:	allow health to be customized
+			allow move damage to be customized (msg overhaul needed)
+			add counter messages (optional)'''

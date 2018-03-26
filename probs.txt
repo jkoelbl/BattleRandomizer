@@ -1,5 +1,5 @@
 players 0.5
-bad 0.25
+bad 0.5
 special 0.05
-counter 0.125
+counter 0.75
 rand_act 0.025

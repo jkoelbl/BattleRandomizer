@@ -1,2 +1,2 @@
-from .file_access import get_data
-from .msgs import message
+from .file_access import *
+from .msgs import message, delim_message
