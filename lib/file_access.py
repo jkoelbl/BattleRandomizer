@@ -9,8 +9,3 @@ def get_data(filename, style):
 	with open(filename) as f:
 		out = eval(args[style])
 	return out
-
-def get_data_delim(filename):
-	with open(filename) as f:
-		out = [line[:len(line)-1] for line in f]
-	return out

@@ -20,10 +20,3 @@ class message:
 				s += ', '
 			s += self.msgs[i]
 		return s
-
-class delim_message(message):
-	def __init__(self, filename='', data=[], hasDelim=False):
-		if hasDelim:
-			self.msgs = self.msgs + get_data_delim(filename)
-		else:
-			super(self, filename, data)
