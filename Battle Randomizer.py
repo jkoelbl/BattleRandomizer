@@ -91,12 +91,12 @@ def main(f):
 	
 	raw = [get_data('data/players_1.txt', 'ss+d'), get_data('data/players_2.txt', 'ss+d')]
 	players = [[p[1] for p in r] for r in raw]
-	health = [[int(h[0]) for h in r] for r in raw]
+	health = [[float(h[0]) for h in r] for r in raw]
 	player_ref = [to_str(p) for p in players]
 	
 	raw = [get_data('data/moves.txt', 'ss+d'), get_data('data/moves_special.txt', 'ss+d')]
 	moves = [message('', [m[1] for m in r]) for r in raw]
-	dmg = [[int(d[0]) for d in r] for r in raw]
+	dmg = [[float(d[0]) for d in r] for r in raw]
 	
 	react_good = [message('data/reactions_good.txt'), message('data/reactions_good_special.txt')]
 	react_bad = [message('data/reactions_bad.txt'), message('data/reactions_bad_special.txt')]

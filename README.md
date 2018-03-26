@@ -10,7 +10,7 @@ To use this, simply run "Battle Randomizer.py" as a Python 3 file. Need Python 3
 
 ##### Adding Characters, Moves, Reactions
 
-To add characters, simply go to "data" and place your desired information into the files of your choice.
+To add characters, simply go to "data" and place your desired information into the files of your choice. Note that for both character health and move/special move damage, a number preceeds the character or action. That number and the character/action must be strictly separated by a semi-colon. This is so the program reads the information correctly, otherwise it will throw an error.
 
 ##### Finding the results of your battle
 
