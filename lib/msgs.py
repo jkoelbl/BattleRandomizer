@@ -6,7 +6,7 @@ class message:
 	
 	def __init__(self, filename='', data=[]):
 		if filename != '':
-			self.msgs = self.msgs + get_data(filename, 'strip')
+			self.msgs = self.msgs + get_data(filename, 's')
 		elif len(data) > 0:
 			self.msgs = self.msgs + data
 	

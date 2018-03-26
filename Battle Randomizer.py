@@ -12,14 +12,6 @@ def to_str(L):
 		s += str(L[i])
 	return s
 
-def concat(T):
-	s = ''
-	for i in range(len(T)):
-		if i > 0:
-			s += ' '
-		s += T[i]
-	return s
-
 def roll_dice(prob):
 	return 1 if random() < prob else 0
 
@@ -65,19 +57,19 @@ def do_battle(players, moves, react, rand_act, counters, probs, health):
 	opponent = [rand_elem(p) for p in players]
 	
 	if roll_dice(probs['rand_act']) == 1:
-		out = concat([opponent[side], rand_act.rnd_msg()])
+		out = to_str([opponent[side], rand_act.rnd_msg()])
 		return out, health
 	
 	special = roll_dice(probs['special'])
-	out = concat([opponent[side], moves[special].rnd_msg()])
+	out = to_str([opponent[side], moves[special].rnd_msg()])
 	
 	while roll_dice(probs['counter']) == 1 and special != 1:
 		special = roll_dice(probs['special'])
-		out += ' ' + concat([counters.rnd_msg(), opponent[1-side], moves[special].rnd_msg()])
+		out += ' ' + to_str([counters.rnd_msg(), opponent[1-side], moves[special].rnd_msg()])
 		side = 1-side
 	
 	outcome = roll_dice(probs['bad'])
-	out += ' ' + concat([opponent[1-side], react[outcome][special].rnd_msg()])
+	out += ' ' + to_str([opponent[1-side], react[outcome][special].rnd_msg()])
 	
 	if outcome == 1:
 		a, b = find(players, opponent[1-side])
@@ -87,8 +79,12 @@ def do_battle(players, moves, react, rand_act, counters, probs, health):
 	return out, health
 	
 def main(f):
-	pieces = get_data('data_log.txt', 'strip')
-	players = [get_data('data/players_1.txt', 'strip'), get_data('data/players_2.txt', 'strip')]
+	pieces = get_data('data_log.txt', 's')
+	raw = [get_data('data/players_1.txt', 'ss+d'), get_data('data/players_2.txt', 'ss+d')]
+	[[print(p) for p in r] for r in raw]
+	players = [[p[0] for p in r] for r in raw]
+	health = [[int(h[1]) for h in r] for r in raw]
+	
 	moves = [message('data/moves.txt'), message('data/moves_special.txt')]
 	react_good = [message('data/reactions_good.txt'), message('data/reactions_good_special.txt')]
 	react_bad = [message('data/reactions_bad.txt'), message('data/reactions_bad_special.txt')]
@@ -98,12 +94,11 @@ def main(f):
 	
 	player_ref = [to_str(p) for p in players]
 	
-	raw = get_data('probs.txt', 'split+strip')
+	raw = get_data('probs.txt', 'ss+')
 	probs = {}
 	for r in raw:
 		probs[r[0]] = float(r[1])
 	
-	health = [[5, 5, 5], [5]]
 	starting_stats(players, health, f)
 	
 	while len(health[0]) > 0 and len(health[1]) > 0:
@@ -121,5 +116,5 @@ class forDebugging:
 f = forDebugging()
 main(f)
 
-''' TODO:	allow health to be customized
-			allow move damage to be customized (msg overhaul needed)'''
+''' TODO:
+		allow move damage to be customized (msg overhaul needed)'''
